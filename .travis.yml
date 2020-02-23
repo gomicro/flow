@@ -1,0 +1,14 @@
+language: go
+
+go:
+  - 1.13
+  - tip
+
+install:
+  - go get -u golang.org/x/lint/golint
+
+script:
+  - make fmt vet lint build test
+
+notifications:
+  email: false
