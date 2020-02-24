@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"github.com/gomicro/flow/cmd/auth"
+	"github.com/gomicro/flow/cmd/aws"
 	"github.com/gomicro/flow/fmt"
 )
 
@@ -16,7 +16,7 @@ func init() {
 	RootCmd.PersistentFlags().Bool("verbose", false, "show more verbose output")
 	viper.BindPFlag("verbose", RootCmd.PersistentFlags().Lookup("verbose"))
 
-	RootCmd.AddCommand(auth.AuthCmd)
+	RootCmd.AddCommand(aws.AwsCmd)
 }
 
 func initEnvs() {

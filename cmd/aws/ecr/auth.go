@@ -1,13 +1,10 @@
-package auth
+package ecr
 
 import (
 	"encoding/base64"
-	"net/http"
 	"os"
 	"strings"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ecr"
 	"github.com/spf13/cobra"
 
@@ -15,39 +12,20 @@ import (
 )
 
 var (
-	ecrSvc *ecr.ECR
 	region string
 )
 
 func init() {
-	AuthCmd.AddCommand(EcrCmd)
+	EcrCmd.AddCommand(AuthCmd)
 
-	EcrCmd.Flags().StringVar(&region, "region", "us-east-1", "aws region to use")
-
-	initSvc()
+	AuthCmd.Flags().StringVar(&region, "region", "us-east-1", "aws region to use")
 }
 
-func initSvc() {
-	httpClient := &http.Client{}
-
-	cnf := &aws.Config{
-		Region:     &region,
-		HTTPClient: httpClient,
-	}
-
-	sess, err := session.NewSession(cnf)
-	if err != nil {
-		fmt.Printf("Error creating session: %v", err.Error())
-		os.Exit(1)
-	}
-
-	ecrSvc = ecr.New(sess)
-}
-
-// EcrCmd represents the root of the ECR commands
-var EcrCmd = &cobra.Command{
-	Use:   "ecr",
-	Short: "ECR actions",
+// AuthCmd represents the root of the ECR commands
+var AuthCmd = &cobra.Command{
+	Use:   "auth",
+	Short: "Authenticate with ECR",
+	Long:  `Authenticate with the AWS ECR service`,
 	Run:   ecrFunc,
 }
 
