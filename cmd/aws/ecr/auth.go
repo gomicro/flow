@@ -21,15 +21,15 @@ func init() {
 	AuthCmd.Flags().StringVar(&region, "region", "us-east-1", "aws region to use")
 }
 
-// AuthCmd represents the root of the ECR commands
+// AuthCmd represents the ECR auth commands
 var AuthCmd = &cobra.Command{
 	Use:   "auth",
 	Short: "Authenticate with ECR",
 	Long:  `Authenticate with the AWS ECR service`,
-	Run:   ecrFunc,
+	Run:   authFunc,
 }
 
-func ecrFunc(cmd *cobra.Command, args []string) {
+func authFunc(cmd *cobra.Command, args []string) {
 	input := &ecr.GetAuthorizationTokenInput{
 		//RegistryIds: []*string{},
 	}
