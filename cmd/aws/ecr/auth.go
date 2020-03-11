@@ -12,13 +12,15 @@ import (
 )
 
 var (
-	region string
+	region     string
+	registries []string
 )
 
 func init() {
 	EcrCmd.AddCommand(AuthCmd)
 
 	AuthCmd.Flags().StringVar(&region, "region", "us-east-1", "aws region to use")
+	AuthCmd.Flags().StringSliceVar(&registries, "registryID", nil, "aws registry ID to auth with, use flag multiple times to auth with multiple registries")
 }
 
 // AuthCmd represents the ECR auth commands
@@ -30,8 +32,14 @@ var AuthCmd = &cobra.Command{
 }
 
 func authFunc(cmd *cobra.Command, args []string) {
+	rs := make([]*string, len(registries), cap(registries))
+
+	for i := range registries {
+		rs[i] = &registries[i]
+	}
+
 	input := &ecr.GetAuthorizationTokenInput{
-		//RegistryIds: []*string{},
+		RegistryIds: rs,
 	}
 
 	auths, err := ecrSvc.GetAuthorizationToken(input)
