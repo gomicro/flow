@@ -10,3 +10,7 @@ builds:
     - darwin
     - windows
     - linux
+
+archives:
+  -
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
