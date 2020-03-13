@@ -14,9 +14,13 @@ import (
 
 var (
 	ecrSvc *ecr.ECR
+
+	region string
 )
 
 func init() {
+	AuthCmd.Flags().StringVar(&region, "region", "us-east-1", "aws region to use")
+
 	httpClient := &http.Client{}
 
 	cnf := &aws.Config{
