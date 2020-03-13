@@ -12,14 +12,12 @@ import (
 )
 
 var (
-	region     string
 	registries []string
 )
 
 func init() {
 	EcrCmd.AddCommand(AuthCmd)
 
-	AuthCmd.Flags().StringVar(&region, "region", "us-east-1", "aws region to use")
 	AuthCmd.Flags().StringSliceVar(&registries, "registryID", nil, "aws registry ID to auth with, use flag multiple times to auth with multiple registries")
 }
 
