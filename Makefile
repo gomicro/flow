@@ -8,7 +8,7 @@ GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 GOLIST=$(GOCMD) list
 GOVET=$(GOCMD) vet
-GOTEST=$(GOCMD) test -v
+GOTEST=$(GOCMD) test -v ./...
 GOFMT=$(GOCMD) fmt
 CGO_ENABLED ?= 0
 GOOS ?= $(shell uname -s | tr '[:upper:]' '[:lower:]')
@@ -39,6 +39,10 @@ coverage: ## Generates the total code coverage of the project
 	@echo 'mode: count' > $(COVERAGE_DIR)/tmp/full.out
 	@tail -q -n +2 $(COVERAGE_DIR)/*.out >> $(COVERAGE_DIR)/tmp/full.out
 	@$(GOCMD) tool cover -func=$(COVERAGE_DIR)/tmp/full.out | tail -n 1 | sed -e 's/^.*statements)[[:space:]]*//' -e 's/%//'
+
+.PHONY: deploy
+deploy: ## Deploy the artifacts
+	@ext/goreleaser release
 
 .PHONY: help
 help: ## Show This Help

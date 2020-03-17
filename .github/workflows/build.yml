@@ -68,7 +68,6 @@ jobs:
     env:
       GOPATH: ${{ github.workspace }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      VERSION: ${GITHUB_REF/refs\/tags\//}
 
     steps:
 
@@ -83,8 +82,10 @@ jobs:
         fetch-depth: 1
         path: ./src/github.com/${{ github.repository }}
 
-    - name: GoReleaser
-      uses: goreleaser/goreleaser-action@v1
-      with:
-        version: latest
-        args: release --rm-dist
+    - name: Setup
+      run: |
+        echo "::set-env name=VERSION::${GITHUB_REF/refs\/tags\//}"
+
+    - name: Deploy
+      working-directory: ${{ github.workspace }}/src/github.com/${{ github.repository }}
+      run: make deploy
