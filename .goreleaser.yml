@@ -4,7 +4,7 @@ builds:
     - CGO_ENABLED=0
 
   ldflags:
-    - -X "github.com/gomicro/flow/cmd.Version={{.Env.TRAVIS_TAG}}"
+    - -X "github.com/gomicro/flow/cmd.Version={{.Env.VERSION}}"
 
   goos:
     - darwin
