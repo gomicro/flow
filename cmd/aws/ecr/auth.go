@@ -36,8 +36,10 @@ func authFunc(cmd *cobra.Command, args []string) {
 		rs[i] = &registries[i]
 	}
 
-	input := &ecr.GetAuthorizationTokenInput{
-		RegistryIds: rs,
+	input := &ecr.GetAuthorizationTokenInput{}
+
+	if len(registries) > 0 {
+		input.RegistryIds = rs
 	}
 
 	auths, err := ecrSvc.GetAuthorizationToken(input)
