@@ -2,7 +2,7 @@
 
 
 [[projects]]
-  digest = "1:7dcf501df298891d8a48c311cf27b066f0c15bd79342de6962230866678bcdd5"
+  digest = "1:5aa20dbdc06cefd9c52b50ae6c275598effef00ad54d0eb7480a0292f2bde015"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -40,12 +40,13 @@
     "private/protocol/rest",
     "private/protocol/xml/xmlutil",
     "service/ecr",
+    "service/ecs",
     "service/sts",
     "service/sts/stsiface",
   ]
   pruneopts = "UT"
-  revision = "ad2cb9593548e15aec0bd9175b8fd45ddc8f4ee7"
-  version = "v1.29.8"
+  revision = "c56c674237bf8a0a9a5c5494fffacd99e94686e4"
+  version = "v1.29.29"
 
 [[projects]]
   digest = "1:abeb38ade3f32a92943e5be54f55ed6d6e3b6602761d74b4aab4c9dd45c18abd"
@@ -216,8 +217,10 @@
   analyzer-version = 1
   input-imports = [
     "github.com/aws/aws-sdk-go/aws",
+    "github.com/aws/aws-sdk-go/aws/awserr",
     "github.com/aws/aws-sdk-go/aws/session",
     "github.com/aws/aws-sdk-go/service/ecr",
+    "github.com/aws/aws-sdk-go/service/ecs",
     "github.com/spf13/cobra",
     "github.com/spf13/viper",
   ]
