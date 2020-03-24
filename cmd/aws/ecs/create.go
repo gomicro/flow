@@ -1,23 +1,27 @@
 package ecs
 
 import (
+	"os"
 	"strings"
 
 	"github.com/aws/aws-sdk-go/service/ecs"
+	"github.com/gomicro/flow/envs"
 	"github.com/gomicro/flow/fmt"
 	"github.com/spf13/cobra"
 )
 
 var (
-	cpu    int64
-	memory int64
-	name   string
+	cpu     int64
+	envFile string
+	memory  int64
+	name    string
 )
 
 func init() {
 	EcsCmd.AddCommand(CreateCmd)
 
 	CreateCmd.Flags().Int64Var(&cpu, "cpu", int64(0), "cpus to assign to the task definition")
+	CreateCmd.Flags().StringVar(&envFile, "envFile", "", "file to parse env vars from")
 	CreateCmd.Flags().Int64Var(&memory, "memory", int64(0), "memory to assign to the task definition")
 	CreateCmd.Flags().StringVar(&name, "name", "", "name to give the task definition")
 }
@@ -56,6 +60,22 @@ func createFunc(cmd *cobra.Command, args []string) {
 
 	if cpu != 0 {
 		input.ContainerDefinitions[0].Cpu = &cpu
+	}
+
+	if envFile != "" {
+		es, err := envs.ParseFile(envFile)
+		if err != nil {
+			fmt.Printf("Error parsing env file: %v", err.Error())
+			os.Exit(1)
+		}
+
+		awsEnvs := make([]*ecs.KeyValuePair, len(es))
+
+		for i := range es {
+			awsEnvs = append(awsEnvs, &ecs.KeyValuePair{Name: &es[i].Key, Value: &es[i].Value})
+		}
+
+		input.ContainerDefinitions[0].Environment = awsEnvs
 	}
 
 	if memory != 0 {
