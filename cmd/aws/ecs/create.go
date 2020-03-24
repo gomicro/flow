@@ -84,6 +84,7 @@ func createFunc(cmd *cobra.Command, args []string) {
 
 	if name != "" {
 		input.ContainerDefinitions[0].Name = &name
+		input.Family = &name
 	} else {
 		splits := strings.Split(image, "amazonaws.com/")
 
@@ -92,9 +93,7 @@ func createFunc(cmd *cobra.Command, args []string) {
 			imageName = splits[1]
 		}
 		input.ContainerDefinitions[0].Name = &imageName
+		input.Family = &imageName
 	}
 
-	splits := strings.Split(image, "/")
-	family := splits[len(splits)-1]
-	input.Family = &family
 }
