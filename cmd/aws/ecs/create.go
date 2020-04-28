@@ -96,4 +96,11 @@ func createFunc(cmd *cobra.Command, args []string) {
 		input.Family = &imageName
 	}
 
+	result, err := ecsSvc.RegisterTaskDefinition(input)
+	if err != nil {
+		fmt.Printf("Error creating task definition: %v", err.Error())
+		os.Exit(1)
+	}
+
+	fmt.Printf("%v", result)
 }
