@@ -2,7 +2,7 @@
 
 
 [[projects]]
-  digest = "1:7dcf501df298891d8a48c311cf27b066f0c15bd79342de6962230866678bcdd5"
+  digest = "1:5aa20dbdc06cefd9c52b50ae6c275598effef00ad54d0eb7480a0292f2bde015"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -40,12 +40,21 @@
     "private/protocol/rest",
     "private/protocol/xml/xmlutil",
     "service/ecr",
+    "service/ecs",
     "service/sts",
     "service/sts/stsiface",
   ]
   pruneopts = "UT"
-  revision = "ad2cb9593548e15aec0bd9175b8fd45ddc8f4ee7"
-  version = "v1.29.8"
+  revision = "c56c674237bf8a0a9a5c5494fffacd99e94686e4"
+  version = "v1.29.29"
+
+[[projects]]
+  digest = "1:0afa63759ae8c5aa13d813346e414e7ed3bde76a98f48b9ebe3272f5a5e2f7ec"
+  name = "github.com/franela/goblin"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "cd5d08fb4ede9eaac1812fdb513552e7404eae2e"
+  version = "0.0.2"
 
 [[projects]]
   digest = "1:abeb38ade3f32a92943e5be54f55ed6d6e3b6602761d74b4aab4c9dd45c18abd"
@@ -104,6 +113,27 @@
   pruneopts = "UT"
   revision = "3536a929edddb9a5b34bd6861dc4a9647cb459fe"
   version = "v1.1.2"
+
+[[projects]]
+  digest = "1:d15ecb645bb996d9507493e42adc07badc8a5aeef371cdc19238c0f378845be1"
+  name = "github.com/onsi/gomega"
+  packages = [
+    ".",
+    "format",
+    "internal/assertion",
+    "internal/asyncassertion",
+    "internal/oraclematcher",
+    "internal/testingtsupport",
+    "matchers",
+    "matchers/support/goraph/bipartitegraph",
+    "matchers/support/goraph/edge",
+    "matchers/support/goraph/node",
+    "matchers/support/goraph/util",
+    "types",
+  ]
+  pruneopts = "UT"
+  revision = "6be6c439588487cd908a3a700795660c2a16dfec"
+  version = "v1.9.0"
 
 [[projects]]
   digest = "1:6eea828983c70075ca297bb915ffbcfd3e34c5a50affd94428a65df955c0ff9c"
@@ -174,6 +204,18 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:8c294aabd4396170f5bcbb763d558e4c8d21ded4b2a1618dfb664e58a4fffeef"
+  name = "golang.org/x/net"
+  packages = [
+    "html",
+    "html/atom",
+    "html/charset",
+  ]
+  pruneopts = "UT"
+  revision = "ff2c4b7c35a07b0c1e90ce72aa7bfe41bb66a3cb"
+
+[[projects]]
+  branch = "master"
   digest = "1:578046baf093df15df2904bbb0fe06f3f2385bad59987532201007754aa7e1d5"
   name = "golang.org/x/sys"
   packages = ["unix"]
@@ -181,12 +223,28 @@
   revision = "d5e6a3e2c0ae16fc7480523ebcb7fd4dd3215489"
 
 [[projects]]
-  digest = "1:1093f2eb4b344996604f7d8b29a16c5b22ab9e1b25652140d3fede39f640d5cd"
+  digest = "1:7570a3e4daa14b7627089e77ad8c714f5f36b4cf1b7dfd8510df7d6935dc42a0"
   name = "golang.org/x/text"
   packages = [
+    "encoding",
+    "encoding/charmap",
+    "encoding/htmlindex",
+    "encoding/internal",
+    "encoding/internal/identifier",
+    "encoding/japanese",
+    "encoding/korean",
+    "encoding/simplifiedchinese",
+    "encoding/traditionalchinese",
+    "encoding/unicode",
     "internal/gen",
+    "internal/language",
+    "internal/language/compact",
+    "internal/tag",
     "internal/triegen",
     "internal/ucd",
+    "internal/utf8internal",
+    "language",
+    "runes",
     "transform",
     "unicode/cldr",
     "unicode/norm",
@@ -194,6 +252,17 @@
   pruneopts = "UT"
   revision = "342b2e1fbaa52c93f31447ad2c6abc048c63e475"
   version = "v0.3.2"
+
+[[projects]]
+  branch = "master"
+  digest = "1:918a46e4a2fb83df33f668f5a6bd51b2996775d073fce1800d3ec01b0a5ddd2b"
+  name = "golang.org/x/xerrors"
+  packages = [
+    ".",
+    "internal",
+  ]
+  pruneopts = "UT"
+  revision = "9bdfabe68543c54f90421aeb9a60ef8061b5b544"
 
 [[projects]]
   digest = "1:ef4bd1cd2563d93d3f48352fc24d499a4a2b54c11932814173653ece7db13800"
@@ -216,8 +285,12 @@
   analyzer-version = 1
   input-imports = [
     "github.com/aws/aws-sdk-go/aws",
+    "github.com/aws/aws-sdk-go/aws/awserr",
     "github.com/aws/aws-sdk-go/aws/session",
     "github.com/aws/aws-sdk-go/service/ecr",
+    "github.com/aws/aws-sdk-go/service/ecs",
+    "github.com/franela/goblin",
+    "github.com/onsi/gomega",
     "github.com/spf13/cobra",
     "github.com/spf13/viper",
   ]
