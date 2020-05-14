@@ -2,7 +2,7 @@
 
 
 [[projects]]
-  digest = "1:5aa20dbdc06cefd9c52b50ae6c275598effef00ad54d0eb7480a0292f2bde015"
+  digest = "1:6d0b742f316594cec2451a4b6181e23908456576119f492353538eb7a20a69d9"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -45,8 +45,8 @@
     "service/sts/stsiface",
   ]
   pruneopts = "UT"
-  revision = "c56c674237bf8a0a9a5c5494fffacd99e94686e4"
-  version = "v1.29.29"
+  revision = "c4af927837ebbd1a7a2112eea36972f9a0732ba4"
+  version = "v1.30.28"
 
 [[projects]]
   digest = "1:0afa63759ae8c5aa13d813346e414e7ed3bde76a98f48b9ebe3272f5a5e2f7ec"
@@ -57,12 +57,12 @@
   version = "0.0.2"
 
 [[projects]]
-  digest = "1:abeb38ade3f32a92943e5be54f55ed6d6e3b6602761d74b4aab4c9dd45c18abd"
+  digest = "1:80057945464ffb5b0da1f026beb8df0e8dbd098eaf771a349291bed2cd29a83e"
   name = "github.com/fsnotify/fsnotify"
   packages = ["."]
   pruneopts = "UT"
-  revision = "c2828203cd70a50dcccfb2761f8b1f8ceef9a8e9"
-  version = "v1.4.7"
+  revision = "45d7d09e39ef4ac08d493309fa031790c15bfe8a"
+  version = "v1.4.9"
 
 [[projects]]
   digest = "1:c0d19ab64b32ce9fe5cf4ddceba78d5bc9807f0016db6b1183599da3dcc24d10"
@@ -107,15 +107,15 @@
   version = "v1.8.1"
 
 [[projects]]
-  digest = "1:53bc4cd4914cd7cd52139990d5170d6dc99067ae31c56530621b18b35fc30318"
+  digest = "1:e586e8b78241e01f61c009e449f5fe7573215f38b438edc27a52dbad7ae02c6b"
   name = "github.com/mitchellh/mapstructure"
   packages = ["."]
   pruneopts = "UT"
-  revision = "3536a929edddb9a5b34bd6861dc4a9647cb459fe"
-  version = "v1.1.2"
+  revision = "916b5f23bc2f603eb9012f48efd9e38287e71ed5"
+  version = "v1.3.0"
 
 [[projects]]
-  digest = "1:d15ecb645bb996d9507493e42adc07badc8a5aeef371cdc19238c0f378845be1"
+  digest = "1:5ad39f24b807c86facc5b566ba28c1a02272543d106b76ce9e3b714ffaee37dd"
   name = "github.com/onsi/gomega"
   packages = [
     ".",
@@ -132,16 +132,16 @@
     "types",
   ]
   pruneopts = "UT"
-  revision = "6be6c439588487cd908a3a700795660c2a16dfec"
-  version = "v1.9.0"
+  revision = "1a3d249459a44387a05ca2d2c2b3d5f3db596dcb"
+  version = "v1.10.0"
 
 [[projects]]
-  digest = "1:6eea828983c70075ca297bb915ffbcfd3e34c5a50affd94428a65df955c0ff9c"
+  digest = "1:1d835d5c3153aceef96c2d58866edde1aa70e25339831cff07b1e47456410e5c"
   name = "github.com/pelletier/go-toml"
   packages = ["."]
   pruneopts = "UT"
-  revision = "903d9455db9ff1d7ac1ab199062eca7266dd11a3"
-  version = "v1.6.0"
+  revision = "8e8d2a6aad23fcaa64716c5fa6975ec3abbf8281"
+  version = "v1.7.0"
 
 [[projects]]
   digest = "1:bb495ec276ab82d3dd08504bbc0594a65de8c3b22c6f2aaa92d05b73fbf3a82e"
@@ -163,12 +163,12 @@
   version = "v1.3.1"
 
 [[projects]]
-  digest = "1:6a13467c76490975b05609344b3d882a9185fd11a44a04ede7427d684e0819b9"
+  digest = "1:1e80255eea46af2e2db7da90f95e4b5cfe84f3b58d9a8598ec35b0f2a75c60e4"
   name = "github.com/spf13/cobra"
   packages = ["."]
   pruneopts = "UT"
-  revision = "0da06874266c88228b8f14615396a1f6bfc90ed7"
-  version = "v0.0.6"
+  revision = "6607e6b8603f56adb027298ee6695e06ffb3a819"
+  version = "0.0.7"
 
 [[projects]]
   digest = "1:1b753ec16506f5864d26a28b43703c58831255059644351bbcb019b843950900"
@@ -187,12 +187,12 @@
   version = "v1.0.5"
 
 [[projects]]
-  digest = "1:83d0e0f3f46dc86daf27e4d7c834c8c492db787c53c09d94183de7478db92142"
+  digest = "1:973661255593cb4cca15cf62e3bd80cc34ee1490aae470aa61e668060838f94f"
   name = "github.com/spf13/viper"
   packages = ["."]
   pruneopts = "UT"
-  revision = "4525543ce4fe90f7970f5e2cdc300b8ffc8c0582"
-  version = "v1.6.2"
+  revision = "13df72109047b6ae9c907bce81e327265d6d8a9c"
+  version = "v1.7.0"
 
 [[projects]]
   digest = "1:f4b32291cad5efac2bfdba89ccde6aa04618b62ce06c1a571da2dc4f3f2677fb"
@@ -212,15 +212,18 @@
     "html/charset",
   ]
   pruneopts = "UT"
-  revision = "ff2c4b7c35a07b0c1e90ce72aa7bfe41bb66a3cb"
+  revision = "a91f0712d120a21e49061d61eb6ba9b88cb0d376"
 
 [[projects]]
   branch = "master"
-  digest = "1:578046baf093df15df2904bbb0fe06f3f2385bad59987532201007754aa7e1d5"
+  digest = "1:020620a097c2bfd056c8db7d31a69ea2cfed874ce985763dcd9ae00f9fa5f74b"
   name = "golang.org/x/sys"
-  packages = ["unix"]
+  packages = [
+    "internal/unsafeheader",
+    "unix",
+  ]
   pruneopts = "UT"
-  revision = "d5e6a3e2c0ae16fc7480523ebcb7fd4dd3215489"
+  revision = "417ce2331b5c91eea36730d3e1739adb75193be2"
 
 [[projects]]
   digest = "1:7570a3e4daa14b7627089e77ad8c714f5f36b4cf1b7dfd8510df7d6935dc42a0"
@@ -265,20 +268,20 @@
   revision = "9bdfabe68543c54f90421aeb9a60ef8061b5b544"
 
 [[projects]]
-  digest = "1:ef4bd1cd2563d93d3f48352fc24d499a4a2b54c11932814173653ece7db13800"
+  digest = "1:2d32701bd465142606b3a84562c6c63b2950f0fb1bf82f231116a7b89de40e2d"
   name = "gopkg.in/ini.v1"
   packages = ["."]
   pruneopts = "UT"
-  revision = "32cf4f7e9c77f151e18b53067b55549b4d1d411d"
-  version = "v1.52.0"
+  revision = "ad8a10643d24d67f464955e42b23e0d42d60fcb4"
+  version = "v1.56.0"
 
 [[projects]]
-  digest = "1:55b110c99c5fdc4f14930747326acce56b52cfce60b24b1c03ef686ac0e46bb1"
+  digest = "1:d7f1bd887dc650737a421b872ca883059580e9f8314d601f88025df4f4802dce"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   pruneopts = "UT"
-  revision = "53403b58ad1b561927d19068c655246f2db79d48"
-  version = "v2.2.8"
+  revision = "0b1645d91e851e735d3e23330303ce81f70adbe3"
+  version = "v2.3.0"
 
 [solve-meta]
   analyzer-name = "dep"
