@@ -11,18 +11,13 @@ import (
 )
 
 var (
-	cpu     int64
 	envFile string
-	memory  int64
-	name    string
 )
 
 func init() {
 	EcsCmd.AddCommand(CreateCmd)
 
-	CreateCmd.Flags().Int64Var(&cpu, "cpu", int64(0), "cpus to assign to the task definition")
 	CreateCmd.Flags().StringVar(&envFile, "envFile", "", "file to parse env vars from")
-	CreateCmd.Flags().Int64Var(&memory, "memory", int64(0), "memory to assign to the task definition")
 	CreateCmd.Flags().StringVar(&name, "name", "", "name to give the task definition")
 }
 
