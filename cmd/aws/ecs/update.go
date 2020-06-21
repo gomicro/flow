@@ -18,6 +18,8 @@ func init() {
 	EcsCmd.AddCommand(UpdateCmd)
 
 	UpdateCmd.Flags().StringSliceVarP(&env, "env", "e", []string{}, "env var key value pair to update")
+	UpdateCmd.Flags().Int64Var(&cpu, "cpu", int64(0), "cpus to assign to the task definition")
+	UpdateCmd.Flags().Int64Var(&memory, "memory", int64(0), "memory to assign to the task definition")
 	UpdateCmd.Flags().StringVar(&image, "image", "", "image to update")
 	UpdateCmd.Flags().StringVar(&name, "name", "", "name of the task definition to update and create a new revision under")
 	cobra.MarkFlagRequired(UpdateCmd.Flags(), "name")
@@ -26,8 +28,8 @@ func init() {
 // UpdateCmd represents the command to run a single task within ECS
 var UpdateCmd = &cobra.Command{
 	Use:   "update",
-	Short: "Create a task definition in ECS",
-	Long:  `Create a task definition for running later in ECS`,
+	Short: "Update a task definition in ECS",
+	Long:  `Update a task definition in ECS with new values to run`,
 	Run:   updateFunc,
 }
 
