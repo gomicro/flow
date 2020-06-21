@@ -26,8 +26,8 @@ func init() {
 // UpdateCmd represents the command to run a single task within ECS
 var UpdateCmd = &cobra.Command{
 	Use:   "update",
-	Short: "Create a task definition in ECS",
-	Long:  `Create a task definition for running later in ECS`,
+	Short: "Update a task definition in ECS",
+	Long:  `Update a task definition in ECS with new values to run`,
 	Run:   updateFunc,
 }
 
