@@ -1,17 +1,23 @@
 package ecs
 
 import (
-	// "encoding/base64"
 	"os"
-	// "strings"
 
 	"github.com/aws/aws-sdk-go/service/ecs"
 	"github.com/gomicro/flow/fmt"
 	"github.com/spf13/cobra"
 )
 
+var (
+	cluster string
+)
+
 func init() {
 	EcsCmd.AddCommand(RunCmd)
+
+	RunCmd.Flags().StringVar(&cluster, "cluster", "default", "the arn of the cluster to run the task on")
+	RunCmd.Flags().StringVar(&name, "name", "", "name of the task definition to run")
+	cobra.MarkFlagRequired(RunCmd.Flags(), "name")
 }
 
 // RunCmd represents the command to run a single task within ECS
@@ -24,15 +30,13 @@ var RunCmd = &cobra.Command{
 
 func runFunc(cmd *cobra.Command, args []string) {
 	input := &ecs.RunTaskInput{
-		//Cluster:        aws.String("default"),
-		//TaskDefinition: aws.String("sleep360:1"),
+		Cluster:        &cluster,
+		TaskDefinition: &name,
 	}
 
-	result, err := ecsSvc.RunTask(input)
+	_, err := ecsSvc.RunTask(input)
 	if err != nil {
 		fmt.Printf("Error running task: %v", err.Error())
 		os.Exit(1)
 	}
-
-	fmt.Printf("%v", result)
 }
