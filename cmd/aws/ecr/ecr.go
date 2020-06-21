@@ -19,8 +19,17 @@ var (
 )
 
 func init() {
-	AuthCmd.Flags().StringVar(&region, "region", "us-east-1", "aws region to use")
+	EcrCmd.PersistentFlags().StringVar(&region, "region", "us-east-1", "aws region to use")
+}
 
+// EcrCmd represents the root of the auth command
+var EcrCmd = &cobra.Command{
+	Use:              "ecr",
+	Short:            "ECR related commands",
+	PersistentPreRun: configClient,
+}
+
+func configClient(cmd *cobra.Command, args []string) {
 	httpClient := &http.Client{}
 
 	cnf := &aws.Config{
@@ -35,10 +44,4 @@ func init() {
 	}
 
 	ecrSvc = ecr.New(sess)
-}
-
-// EcrCmd represents the root of the auth command
-var EcrCmd = &cobra.Command{
-	Use:   "ecr",
-	Short: "ECR related commands",
 }

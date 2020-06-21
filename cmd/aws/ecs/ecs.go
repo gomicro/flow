@@ -19,8 +19,17 @@ var (
 )
 
 func init() {
-	EcsCmd.Flags().StringVar(&region, "region", "us-east-1", "aws region to use")
+	EcsCmd.PersistentFlags().StringVar(&region, "region", "us-east-1", "aws region to use")
+}
 
+// EcsCmd represents the root of the ecs command
+var EcsCmd = &cobra.Command{
+	Use:              "ecs",
+	Short:            "ECS related commands",
+	PersistentPreRun: configClient,
+}
+
+func configClient(cmd *cobra.Command, args []string) {
 	httpClient := &http.Client{}
 
 	cnf := &aws.Config{
@@ -35,10 +44,4 @@ func init() {
 	}
 
 	ecsSvc = ecs.New(sess)
-}
-
-// EcsCmd represents the root of the ecs command
-var EcsCmd = &cobra.Command{
-	Use:   "ecs",
-	Short: "ECS related commands",
 }
