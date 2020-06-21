@@ -17,21 +17,16 @@ var (
 
 	region string
 
-	cpu     int64
-	envFile string
-	env     []string
-	memory  int64
-	name    string
+	cpu    int64
+	memory int64
+	name   string
 )
 
 func init() {
 	EcsCmd.PersistentFlags().StringVar(&region, "region", "us-east-1", "aws region to use")
 
 	EcsCmd.PersistentFlags().Int64Var(&cpu, "cpu", int64(0), "cpus to assign to the task definition")
-	EcsCmd.PersistentFlags().StringSliceVarP(&env, "env", "e", []string{}, "file to parse env vars from")
-	EcsCmd.PersistentFlags().StringVar(&envFile, "envFile", "", "file to parse env vars from")
 	EcsCmd.PersistentFlags().Int64Var(&memory, "memory", int64(0), "memory to assign to the task definition")
-	EcsCmd.PersistentFlags().StringVar(&name, "name", "", "name to give the task definition")
 }
 
 // EcsCmd represents the root of the ecs command

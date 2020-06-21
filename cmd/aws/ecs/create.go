@@ -10,8 +10,15 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var (
+	envFile string
+)
+
 func init() {
 	EcsCmd.AddCommand(CreateCmd)
+
+	CreateCmd.Flags().StringVar(&envFile, "envFile", "", "file to parse env vars from")
+	CreateCmd.Flags().StringVar(&name, "name", "", "name to give the task definition")
 }
 
 // CreateCmd represents the command to run a single task within ECS
