@@ -18,6 +18,8 @@ func init() {
 	EcsCmd.AddCommand(UpdateCmd)
 
 	UpdateCmd.Flags().StringSliceVarP(&env, "env", "e", []string{}, "env var key value pair to update")
+	UpdateCmd.Flags().Int64Var(&cpu, "cpu", int64(0), "cpus to assign to the task definition")
+	UpdateCmd.Flags().Int64Var(&memory, "memory", int64(0), "memory to assign to the task definition")
 	UpdateCmd.Flags().StringVar(&image, "image", "", "image to update")
 	UpdateCmd.Flags().StringVar(&name, "name", "", "name of the task definition to update and create a new revision under")
 	cobra.MarkFlagRequired(UpdateCmd.Flags(), "name")
