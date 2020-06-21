@@ -26,13 +26,9 @@ func ParseFile(file string) ([]Env, error) {
 
 	s := bufio.NewScanner(fh)
 	for s.Scan() {
-		splits := strings.SplitN(s.Text(), "=", 2)
-		if len(splits) == 2 {
-			key := splits[0]
-			value := splits[1]
-			if key != "" && value != "" {
-				envs = append(envs, Env{key, value})
-			}
+		key, value := split(s.Text())
+		if key != "" && value != "" {
+			envs = append(envs, Env{key, value})
 		}
 	}
 
@@ -41,4 +37,29 @@ func ParseFile(file string) ([]Env, error) {
 	}
 
 	return envs, err
+}
+
+// ParseSlice takes a slice of strings capable of making up key value pairs and
+// returns split keys and values. It will ignore entries it cannot do anything
+// with.
+func ParseSlice(slice []string) []Env {
+	envs := []Env{}
+
+	for _, kp := range slice {
+		key, value := split(kp)
+		if key != "" && value != "" {
+			envs = append(envs, Env{key, value})
+		}
+	}
+
+	return envs
+}
+
+func split(s string) (string, string) {
+	splits := strings.SplitN(s, "=", 2)
+	if len(splits) == 2 {
+		return splits[0], splits[1]
+	}
+
+	return "", ""
 }

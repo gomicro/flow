@@ -42,4 +42,32 @@ func TestEnvs(t *testing.T) {
 			Expect(err).To(HaveOccurred())
 		})
 	})
+
+	g.Describe("Parsing Slice", func() {
+		g.It("should parse multiple envs", func() {
+			slice := []string{
+				"FOO=bar",
+				"BAZ=biz",
+			}
+
+			es := envs.ParseSlice(slice)
+			Expect(len(es)).To(Equal(2))
+			Expect(es[0].Key).To(Equal("FOO"))
+			Expect(es[0].Value).To(Equal("bar"))
+			Expect(es[1].Key).To(Equal("BAZ"))
+			Expect(es[1].Value).To(Equal("biz"))
+		})
+
+		g.It("should ignore incomplete key pairs", func() {
+			slice := []string{
+				"FOO=bar",
+				"MISSING=",
+			}
+
+			es := envs.ParseSlice(slice)
+			Expect(len(es)).To(Equal(1))
+			Expect(es[0].Key).To(Equal("FOO"))
+			Expect(es[0].Value).To(Equal("bar"))
+		})
+	})
 }
