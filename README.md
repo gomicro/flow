@@ -8,7 +8,7 @@ Flow is a tool for deploying microservices to AWS.
 
 # Why Flow?
 
-Even when you're looking to do a very discrete set of aws-cli actions for build and deploy, depending on your project, there is a significant portion of time spent prepping your environment (upwards of 1 min per build). This prep, which has nothing to do with your project, can consist of setting up Python, maybe install pip, and then install the aws-cli. Additionally you reguarly will run into version conflicts between your installed version of Python and the required version by the aws-cli breaking your build.
+Even when you're looking to do a very discrete set of aws-cli actions for build and deploy, depending on your project, there is a significant portion of time spent prepping your environment (upwards of 1 min per build). This prep, which has nothing to do with your project, can consist of setting up Python, maybe install pip, and then install the aws-cli. Additionally you regularly will run into version conflicts between your installed version of Python and the required version by the aws-cli breaking your build.
 
 Flow aims to drastically reduce that time by allowing for a single download with no additional dependencies. Downloading a single, precompiled binary into your build is simpler, faster, and less fragile.
 
