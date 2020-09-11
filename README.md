@@ -11,6 +11,10 @@ Golang version 1.12 or higher
 
 # Installation
 
+## Precompiled Binary
+See the [Latest Release](https://github.com/gomicro/flow/releases/latest) page for a download link to the binary compiled for your system.
+
+## From Source
 ```
 go get github.com/gomicro/flow
 ```
