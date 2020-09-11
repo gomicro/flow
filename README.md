@@ -12,7 +12,7 @@ When you're looking to do a very discrete set of aws-cli actions for build and d
 
 Flow aims to drastically reduce that time by allowing for a single download with no additional dependencies. Downloading a single, precompiled binary into your build is simpler, faster, and less fragile.
 
-To additionally note, Flow is not intended to replace the entire toolkit of the [aws-cli](https://github.com/aws/aws-cli). If you need them, please do look to there.
+To additionally note, Flow is not intended to replace the entire toolkit of the [aws-cli](https://github.com/aws/aws-cli). If you need them, please do look there.
 
 # Installation
 
