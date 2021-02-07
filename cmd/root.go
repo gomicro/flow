@@ -14,7 +14,11 @@ func init() {
 	cobra.OnInitialize(initEnvs)
 
 	RootCmd.PersistentFlags().Bool("verbose", false, "show more verbose output")
-	viper.BindPFlag("verbose", RootCmd.PersistentFlags().Lookup("verbose"))
+	err := viper.BindPFlag("verbose", RootCmd.PersistentFlags().Lookup("verbose"))
+	if err != nil {
+		fmt.Printf("Error setting up: %v\n", err.Error())
+		os.Exit(1)
+	}
 
 	RootCmd.AddCommand(aws.AwsCmd)
 }

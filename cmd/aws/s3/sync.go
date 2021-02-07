@@ -9,6 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
+	ourfmt "github.com/gomicro/flow/fmt"
 	"github.com/gosuri/uiprogress"
 	"github.com/spf13/cobra"
 )
@@ -41,26 +42,30 @@ func syncFunc(cmd *cobra.Command, args []string) {
 
 	uiprogress.Start()
 
-	iter := newSyncFolderIterator(path, bucket)
+	iter, err := newSyncFolderIterator(path, bucket)
+	if err != nil {
+		ourfmt.Printf("unexpected error occurred creating folder iterator: %v", err)
+		os.Exit(1)
+	}
 
 	bar = uiprogress.AddBar(len(iter.fileInfos))
 	bar.AppendCompleted()
 	bar.PrependElapsed()
 
-	err := s3Uploader.UploadWithIterator(aws.BackgroundContext(), iter)
+	err = s3Uploader.UploadWithIterator(aws.BackgroundContext(), iter)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "unexpected error has occurred: %v", err)
+		ourfmt.Printf("unexpected error has occurred: %v", err)
 		os.Exit(1)
 	}
 
 	err = iter.Err()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "unexpected error occurred during file walking: %v", err)
+		ourfmt.Printf("unexpected error occurred during file walking: %v", err)
 		os.Exit(1)
 	}
 
 	uiprogress.Stop()
-	fmt.Println("Upload complete...")
+	ourfmt.Printf("Upload complete...\n")
 }
 
 type syncFolderIterator struct {
@@ -74,9 +79,9 @@ type fileInfo struct {
 	fullpath string
 }
 
-func newSyncFolderIterator(path, bucket string) *syncFolderIterator {
+func newSyncFolderIterator(path, bucket string) (*syncFolderIterator, error) {
 	metadata := []fileInfo{}
-	filepath.Walk(path, func(p string, info os.FileInfo, err error) error {
+	err := filepath.Walk(path, func(p string, info os.FileInfo, err error) error {
 		if !info.IsDir() {
 			key := strings.TrimPrefix(p, path)
 			metadata = append(metadata, fileInfo{key, p})
@@ -84,12 +89,15 @@ func newSyncFolderIterator(path, bucket string) *syncFolderIterator {
 
 		return nil
 	})
+	if err != nil {
+		return nil, fmt.Errorf("filepath walk: %w", err)
+	}
 
 	return &syncFolderIterator{
 		bucket:    bucket,
 		fileInfos: metadata,
 		err:       nil,
-	}
+	}, nil
 }
 
 func (iter *syncFolderIterator) Next() bool {
