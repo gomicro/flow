@@ -9,11 +9,13 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
+	"github.com/gosuri/uiprogress"
 	"github.com/spf13/cobra"
 )
 
 var (
 	bucket string
+	bar    *uiprogress.Bar
 )
 
 func init() {
@@ -37,7 +39,12 @@ func syncFunc(cmd *cobra.Command, args []string) {
 		path = "."
 	}
 
+	uiprogress.Start()
 	iter := newSyncFolderIterator(path, bucket)
+
+	bar = uiprogress.AddBar(len(iter.fileInfos))
+	bar.AppendCompleted()
+	bar.PrependElapsed()
 
 	err := s3Uploader.UploadWithIterator(aws.BackgroundContext(), iter)
 	if err != nil {
@@ -73,13 +80,14 @@ func newSyncFolderIterator(path, bucket string) *syncFolderIterator {
 	})
 
 	return &syncFolderIterator{
-		bucket,
-		metadata,
-		nil,
+		bucket:    bucket,
+		fileInfos: metadata,
+		err:       nil,
 	}
 }
 
 func (iter *syncFolderIterator) Next() bool {
+	bar.Incr()
 	return len(iter.fileInfos) > 0
 }
 
@@ -90,6 +98,7 @@ func (iter *syncFolderIterator) Err() error {
 func (iter *syncFolderIterator) UploadObject() s3manager.BatchUploadObject {
 	fi := iter.fileInfos[0]
 	iter.fileInfos = iter.fileInfos[1:]
+
 	body, err := os.Open(fi.fullpath)
 	if err != nil {
 		iter.err = err
