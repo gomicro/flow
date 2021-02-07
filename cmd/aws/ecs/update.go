@@ -22,7 +22,12 @@ func init() {
 	UpdateCmd.Flags().Int64Var(&memory, "memory", int64(0), "memory to assign to the task definition")
 	UpdateCmd.Flags().StringVar(&image, "image", "", "image to update")
 	UpdateCmd.Flags().StringVar(&name, "name", "", "name of the task definition to update and create a new revision under")
-	cobra.MarkFlagRequired(UpdateCmd.Flags(), "name")
+
+	err := cobra.MarkFlagRequired(UpdateCmd.Flags(), "name")
+	if err != nil {
+		fmt.Printf("Error setting up: ecs: update: %v\n", err.Error())
+		os.Exit(1)
+	}
 }
 
 // UpdateCmd represents the command to run a single task within ECS

@@ -17,7 +17,12 @@ func init() {
 
 	RunCmd.Flags().StringVar(&cluster, "cluster", "default", "the arn of the cluster to run the task on")
 	RunCmd.Flags().StringVar(&name, "name", "", "name of the task definition to run")
-	cobra.MarkFlagRequired(RunCmd.Flags(), "name")
+
+	err := cobra.MarkFlagRequired(RunCmd.Flags(), "name")
+	if err != nil {
+		fmt.Printf("Error setting up: ecs: run: %v\n", err.Error())
+		os.Exit(1)
+	}
 }
 
 // RunCmd represents the command to run a single task within ECS

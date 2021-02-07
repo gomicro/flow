@@ -7,33 +7,17 @@ jobs:
     name: Linting
     runs-on: ubuntu-latest
 
-    env:
-      # https://github.com/actions/setup-go/issues/14
-      GOPATH: ${{ github.workspace }}
-      GOBIN: ${{ github.workspace }}/bin
-
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          #path: ./src/github.com/${{ github.repository }}
 
-    - name: Install Go
-      uses: actions/setup-go@v1
-      with:
-        go-version: 1.13
-
-    - name: Setup
-      run: |
-        echo "::add-path::${GOBIN}"
-        go get -u golang.org/x/lint/golint
-
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 1
-        path: ./src/github.com/${{ github.repository }}
-
-    - name: Fmt, Vet, Lint
-      working-directory: ${{ github.workspace }}/src/github.com/${{ github.repository }}
-      run: |
-        make fmt vet lint
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: v1.29
 
   test:
     name: Test

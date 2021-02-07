@@ -5,11 +5,13 @@ import (
 
 	"github.com/gomicro/flow/cmd/aws/ecr"
 	"github.com/gomicro/flow/cmd/aws/ecs"
+	"github.com/gomicro/flow/cmd/aws/s3"
 )
 
 func init() {
 	AwsCmd.AddCommand(ecr.EcrCmd)
 	AwsCmd.AddCommand(ecs.EcsCmd)
+	AwsCmd.AddCommand(s3.S3Cmd)
 }
 
 // AwsCmd represents the root of the aws command
