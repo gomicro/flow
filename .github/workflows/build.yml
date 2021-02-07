@@ -66,10 +66,6 @@ jobs:
         fetch-depth: 1
         path: ./src/github.com/${{ github.repository }}
 
-    - name: Setup
-      run: |
-        echo "::set-env name=VERSION::${GITHUB_REF/refs\/tags\//}"
-
     - name: Deploy
       working-directory: ${{ github.workspace }}/src/github.com/${{ github.repository }}
       run: make deploy
