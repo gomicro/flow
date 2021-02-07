@@ -40,6 +40,7 @@ func syncFunc(cmd *cobra.Command, args []string) {
 	}
 
 	uiprogress.Start()
+
 	iter := newSyncFolderIterator(path, bucket)
 
 	bar = uiprogress.AddBar(len(iter.fileInfos))
@@ -49,12 +50,17 @@ func syncFunc(cmd *cobra.Command, args []string) {
 	err := s3Uploader.UploadWithIterator(aws.BackgroundContext(), iter)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "unexpected error has occurred: %v", err)
+		os.Exit(1)
 	}
 
 	err = iter.Err()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "unexpected error occurred during file walking: %v", err)
+		os.Exit(1)
 	}
+
+	uiprogress.Stop()
+	fmt.Println("Upload complete...")
 }
 
 type syncFolderIterator struct {
