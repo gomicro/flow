@@ -43,7 +43,7 @@ coverage: ## Generates the total code coverage of the project
 
 .PHONY: deploy
 deploy: ## Deploy the artifacts
-	@VERSION=$(DEPLOY_VERSION) ext/goreleaser release
+	@VERSION=$(DEPLOY_VERSION) goreleaser release
 
 .PHONY: help
 help: ## Show This Help
