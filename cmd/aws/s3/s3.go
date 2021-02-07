@@ -20,6 +20,10 @@ var (
 	region string
 )
 
+func init() {
+	S3Cmd.PersistentFlags().StringVar(&region, "region", "us-east-1", "aws region to use")
+}
+
 // S3Cmd represents the root of the s3 command
 var S3Cmd = &cobra.Command{
 	Use:              "s3",
