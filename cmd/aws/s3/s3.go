@@ -6,7 +6,6 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/spf13/cobra"
 
@@ -14,7 +13,6 @@ import (
 )
 
 var (
-	s3Svc      *s3.S3
 	s3Uploader *s3manager.Uploader
 
 	region string
@@ -45,6 +43,5 @@ func configClient(cmd *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 
-	s3Svc = s3.New(sess)
 	s3Uploader = s3manager.NewUploader(sess)
 }
