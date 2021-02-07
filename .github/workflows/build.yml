@@ -72,5 +72,5 @@ jobs:
         install-only: true
 
     - name: Deploy
-      workdir: ${{ github.workspace }}/src/github.com/${{ github.repository }}
+      working-directory: ${{ github.workspace }}/src/github.com/${{ github.repository }}
       run: make deploy
