@@ -3,6 +3,7 @@ package ecr
 import (
 	"encoding/base64"
 	"os"
+	"os/exec"
 	"strings"
 
 	"github.com/aws/aws-sdk-go/service/ecr"
@@ -25,7 +26,7 @@ func init() {
 var AuthCmd = &cobra.Command{
 	Use:   "auth",
 	Short: "Authenticate with ECR",
-	Long:  `Authenticate with the AWS ECR service`,
+	Long:  `Authenticate with the AWS ECR service and login to the ECR.`,
 	Run:   authFunc,
 }
 
@@ -56,7 +57,11 @@ func authFunc(cmd *cobra.Command, args []string) {
 			tkn, _ := base64.StdEncoding.DecodeString(*auth.AuthorizationToken)
 
 			parts := strings.SplitN(string(tkn), ":", 2)
-			fmt.Printf("docker login -u %v -p %v %v", parts[0], parts[1], *auth.ProxyEndpoint)
+			cmd := exec.Command("docker", "login", "-u", parts[0], "-p", parts[1], *auth.ProxyEndpoint)
+			err := cmd.Run()
+			if err != nil {
+				fmt.Printf("Error executing docker login: %v", auth.String())
+			}
 		}
 	}
 }
