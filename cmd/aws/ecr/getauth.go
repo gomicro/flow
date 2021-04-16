@@ -3,7 +3,6 @@ package ecr
 import (
 	"encoding/base64"
 	"os"
-	"os/exec"
 	"strings"
 
 	"github.com/aws/aws-sdk-go/service/ecr"
@@ -12,25 +11,21 @@ import (
 	"github.com/gomicro/flow/fmt"
 )
 
-var (
-	registries []string
-)
-
 func init() {
-	EcrCmd.AddCommand(AuthCmd)
+	EcrCmd.AddCommand(GetAuthCmd)
 
-	AuthCmd.Flags().StringSliceVar(&registries, "registryID", nil, "aws registry ID to auth with, use flag multiple times to auth with multiple registries")
+	GetAuthCmd.Flags().StringSliceVar(&registries, "registryID", nil, "aws registry ID to auth with, use flag multiple times to auth with multiple registries")
 }
 
-// AuthCmd represents the ECR auth commands
-var AuthCmd = &cobra.Command{
-	Use:   "auth",
-	Short: "Authenticate with ECR",
-	Long:  `Authenticate with the AWS ECR service and login to the ECR.`,
-	Run:   authFunc,
+// GetAuthCmd represents the ECR get-auth commands
+var GetAuthCmd = &cobra.Command{
+	Use:   "get-auth",
+	Short: "Get ECR authentication creds",
+	Long:  `Get the credentials for authenticating with the AWS ECR service.`,
+	Run:   getAuthFunc,
 }
 
-func authFunc(cmd *cobra.Command, args []string) {
+func getAuthFunc(cmd *cobra.Command, args []string) {
 	rs := make([]*string, len(registries), cap(registries))
 
 	for i := range registries {
@@ -57,11 +52,7 @@ func authFunc(cmd *cobra.Command, args []string) {
 			tkn, _ := base64.StdEncoding.DecodeString(*auth.AuthorizationToken)
 
 			parts := strings.SplitN(string(tkn), ":", 2)
-			cmd := exec.Command("docker", "login", "-u", parts[0], "-p", parts[1], *auth.ProxyEndpoint)
-			err := cmd.Run()
-			if err != nil {
-				fmt.Printf("Error executing docker login: %v", auth.String())
-			}
+			fmt.Printf("docker login -u %v -p %v %v", parts[0], parts[1], *auth.ProxyEndpoint)
 		}
 	}
 }
