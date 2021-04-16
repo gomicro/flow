@@ -5,11 +5,16 @@ builds:
 
   ldflags:
     - -X "github.com/gomicro/flow/cmd.Version={{.Env.VERSION}}"
+    - "-s -w"
 
   goos:
     - darwin
     - windows
     - linux
+
+  ignore:
+    - goos: darwin
+      goarch: 386
 
 archives:
   -

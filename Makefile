@@ -73,4 +73,4 @@ vet: ## Run go vet
 .PHONY: lint
 lint: ## Run golint
 	@echo "linting..."
-	@$(GOLINTCMD) -set_exit_status $(shell $(GOLIST) ./... | grep -v '/vendor/')
+	@golangci-lint run
