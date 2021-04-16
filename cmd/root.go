@@ -30,7 +30,7 @@ func initEnvs() {
 var RootCmd = &cobra.Command{
 	Use:   "flow",
 	Short: "A CLI for deploying services",
-	Long: `Flow is a CLI tool to for a continuous deploy pipeline to use for
+	Long: `Flow is a CLI tool for a continuous deploy pipeline to use for
 	deploying to cloud providers. Easily auth and roll services.`,
 }
 
