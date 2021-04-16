@@ -51,12 +51,12 @@ func authFunc(cmd *cobra.Command, args []string) {
 	if auths == nil {
 		fmt.Printf("Empty reponse from ecr auth")
 		os.Exit(1)
-	}
+	} else {
+		for _, auth := range auths.AuthorizationData {
+			tkn, _ := base64.StdEncoding.DecodeString(*auth.AuthorizationToken)
 
-	for _, auth := range auths.AuthorizationData {
-		tkn, _ := base64.StdEncoding.DecodeString(*auth.AuthorizationToken)
-
-		parts := strings.SplitN(string(tkn), ":", 2)
-		fmt.Printf("docker login -u %v -p %v %v", parts[0], parts[1], *auth.ProxyEndpoint)
+			parts := strings.SplitN(string(tkn), ":", 2)
+			fmt.Printf("docker login -u %v -p %v %v", parts[0], parts[1], *auth.ProxyEndpoint)
+		}
 	}
 }
