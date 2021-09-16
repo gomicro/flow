@@ -12,7 +12,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 1
-          #path: ./src/github.com/${{ github.repository }}
 
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2
@@ -23,11 +22,7 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
 
-    env:
-      GOPATH: ${{ github.workspace }}
-
     steps:
-
     - name: Install Go
       uses: actions/setup-go@v2
       with:
@@ -37,10 +32,8 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
-        path: ./src/github.com/${{ github.repository }}
 
     - name: Test
-      working-directory: ${{ github.workspace }}/src/github.com/${{ github.repository }}
       run: make test
 
   deploy:
@@ -50,7 +43,6 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
 
     env:
-      GOPATH: ${{ github.workspace }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
@@ -64,7 +56,6 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
-        path: ./src/github.com/${{ github.repository }}
 
     - name: Install GoReleaser
       uses: goreleaser/goreleaser-action@v2
@@ -72,5 +63,4 @@ jobs:
         install-only: true
 
     - name: Deploy
-      working-directory: ${{ github.workspace }}/src/github.com/${{ github.repository }}
       run: make deploy
