@@ -1,14 +1,12 @@
 package s3
 
 import (
-	"net/http"
 	"os"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/spf13/cobra"
 
+	"github.com/gomicro/flow/client/aws/session"
 	"github.com/gomicro/flow/fmt"
 )
 
@@ -30,14 +28,7 @@ var S3Cmd = &cobra.Command{
 }
 
 func configClient(cmd *cobra.Command, args []string) {
-	httpClient := &http.Client{}
-
-	cnf := &aws.Config{
-		Region:     &region,
-		HTTPClient: httpClient,
-	}
-
-	sess, err := session.NewSession(cnf)
+	sess, err := session.NewSession()
 	if err != nil {
 		fmt.Printf("Error creating session: %v", err.Error())
 		os.Exit(1)
