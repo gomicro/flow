@@ -12,12 +12,9 @@ import (
 
 var (
 	ecrSvc *ecr.ECR
-
-	region string
 )
 
 func init() {
-	EcrCmd.PersistentFlags().StringVar(&region, "region", "us-east-1", "aws region to use")
 }
 
 // EcrCmd represents the root of the auth command
