@@ -19,7 +19,7 @@ func getJsonValue(heap map[string]interface{}, keys []string) (string, error) {
 			return "", gofmt.Errorf("next level of json is not an object: [%v] = %v", key, next)
 		}
 
-		getJsonValue(newHeap, keys)
+		return getJsonValue(newHeap, keys)
 	}
 
 	val, found := heap[keys[0]]
