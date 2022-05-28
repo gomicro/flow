@@ -1,0 +1,26 @@
+project:
+  name: flow
+steps:
+  build:
+    help: Compiles the project into a binary for the current system's OS
+    envs:
+      CGO_ENABLED: 0
+      GOOS: '{{.Os}}'
+      VERSION: '{{.ShortSha}}'
+    cmd: go build -ldflags "-X 'github.com/gomicro/forge/cmd.Version=$VERSION'" -o {{.Project}} .
+  coverage:
+    help: Generates the code coverage from all the tests
+    cmd: docker run gomicro/gocover
+  install:
+    help: Installs the binary into GOBIN
+    envs:
+      CGO_ENABLED: 0
+      GOOS: '{{.Os}}'
+      VERSION: '{{.ShortSha}}'
+    cmd: go install -ldflags "-X 'github.com/gomicro/forge/cmd.Version=$VERSION'"
+  linters:
+    help: Run all the linters
+    cmd: golangci-lint run
+  test:
+    help: Run the unit tests for the project
+    cmd: go test ./...
