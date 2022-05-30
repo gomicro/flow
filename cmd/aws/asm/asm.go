@@ -17,7 +17,7 @@ var (
 func init() {
 }
 
-// S3Cmd represents the root of the s3 command
+// AsmCmd represents the root of the asm command
 var AsmCmd = &cobra.Command{
 	Use:              "asm",
 	Short:            "asm related commands",
