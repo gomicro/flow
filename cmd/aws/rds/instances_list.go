@@ -14,7 +14,6 @@ import (
 func init() {
 }
 
-// ListCmd represents the list rds instances
 var instancesListCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List db instances",
