@@ -5,15 +5,18 @@ import (
 	"os"
 
 	"github.com/aws/aws-sdk-go/service/rds"
+	aws_asm "github.com/aws/aws-sdk-go/service/secretsmanager"
 	"github.com/gomicro/flow/client/aws/session"
 	"github.com/spf13/cobra"
 )
 
 var (
 	rdsSvc *rds.RDS
+	asmSvc *aws_asm.SecretsManager
 )
 
 func init() {
+	RdsCmd.AddCommand(dbCmd)
 	RdsCmd.AddCommand(instancesCmd)
 }
 
@@ -32,4 +35,5 @@ func configClient(cmd *cobra.Command, args []string) {
 	}
 
 	rdsSvc = rds.New(sess)
+	asmSvc = aws_asm.New(sess)
 }
