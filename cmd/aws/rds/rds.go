@@ -14,6 +14,7 @@ var (
 )
 
 func init() {
+	RdsCmd.AddCommand(instancesCmd)
 }
 
 // RdsCmd represents the root of the rds command
