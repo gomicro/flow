@@ -7,6 +7,7 @@ import (
 	"github.com/gomicro/flow/cmd/aws/ecr"
 	"github.com/gomicro/flow/cmd/aws/ecs"
 	"github.com/gomicro/flow/cmd/aws/profile"
+	"github.com/gomicro/flow/cmd/aws/rds"
 	"github.com/gomicro/flow/cmd/aws/s3"
 )
 
@@ -15,6 +16,7 @@ func init() {
 	AwsCmd.AddCommand(ecr.EcrCmd)
 	AwsCmd.AddCommand(ecs.EcsCmd)
 	AwsCmd.AddCommand(profile.ProfileCmd)
+	AwsCmd.AddCommand(rds.RdsCmd)
 	AwsCmd.AddCommand(s3.S3Cmd)
 }
 
