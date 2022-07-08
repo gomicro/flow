@@ -31,7 +31,7 @@ func instancesListFunc(cmd *cobra.Command, args []string) {
 	err := rdsSvc.DescribeDBInstancesPages(input,
 		func(page *rds.DescribeDBInstancesOutput, lastPage bool) bool {
 			for _, in := range page.DBInstances {
-				name := *in.DBName
+				name := *in.DBInstanceIdentifier
 				if len(name)+1 > padding.name {
 					padding.name = len(name) + 1
 				}
