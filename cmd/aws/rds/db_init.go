@@ -60,7 +60,7 @@ func dbInitFunc(cmd *cobra.Command, args []string) {
 		DBUser: strings.ToLower(args[0]),
 		DBPass: uuid.New().String(),
 	}
-	secret.DBURL = gofmt.Sprintf("postgress://%s:%s@%s/%s", secret.DBUser, secret.DBPass, secret.DBHost, secret.DBUser)
+	secret.DBURL = gofmt.Sprintf("postgres://%s:%s@%s/%s", secret.DBUser, secret.DBPass, secret.DBHost, secret.DBUser)
 
 	db, err := sql.Open("postgres", rootConnStr)
 	if err != nil {
